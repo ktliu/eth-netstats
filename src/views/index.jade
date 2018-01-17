@@ -207,7 +207,14 @@ block content
               i.icon-gas(data-toggle="tooltip", data-placement="top", title="Propagation time", ng-click="orderTable(['-stats.block.number', 'stats.block.propagation'], false)")
             th.th-peerPropagationChart
             th
+              span(data-toggle="tooltip", data-placement="top", title="Current Epoch") ce
+            th.th-blockhash
+            th
+              span(data-toggle="tooltip", data-placement="top", title="Last Justified Epoch") lje
+            th.th-blockhash
+            th
               span(data-toggle="tooltip", data-placement="top", title="Last Finalized Epoch") lfe
+            th.th-blockhash
             th.th-peerPropagationAvg
               i.icon-gas(data-toggle="tooltip", data-placement="top", title="Average propagation time", ng-click="orderTable(['stats.propagationAvg'], false)")
             th
@@ -245,6 +252,16 @@ block content
             td.peerPropagationChart(class="{{node.id}}")
               nodepropagchart(data="{{node.history.join(',')}}")
             td
-              span {{node.stats.casper.last_finalized_epoch}}
+              span {{node.stats.casper.current_epoch}} / {{node.stats.casper.current_epoch*50}}
+            td
+              span.small {{node.stats.casper.current_epoch_hash | hashFilter}}
+            td
+              span {{node.stats.casper.last_justified_epoch}} /{{node.stats.casper.last_justified_epoch*50}}
+            td
+              span.small {{node.stats.casper.last_justified_epoch_hash | hashFilter}}
+            td
+              span {{node.stats.casper.last_finalized_epoch}} /{{node.stats.casper.last_finalized_epoch*50}}
+            td
+              span.small {{node.stats.casper.last_finalized_epoch_hash | hashFilter}}
             td(class="{{ node.stats | propagationNodeAvgTimeClass : bestBlock }}") {{ node.stats | blockPropagationAvgFilter : bestBlock }}
             td(class="{{ node.stats.uptime | upTimeClass : node.stats.active }}") {{ node.stats.uptime | upTimeFilter }}
