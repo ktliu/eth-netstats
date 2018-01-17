@@ -206,6 +206,8 @@ block content
             th.th-peerPropagationTime
               i.icon-gas(data-toggle="tooltip", data-placement="top", title="Propagation time", ng-click="orderTable(['-stats.block.number', 'stats.block.propagation'], false)")
             th.th-peerPropagationChart
+            th
+              span(data-toggle="tooltip", data-placement="top", title="Last Finalized Epoch") lfe
             th.th-peerPropagationAvg
               i.icon-gas(data-toggle="tooltip", data-placement="top", title="Average propagation time", ng-click="orderTable(['stats.propagationAvg'], false)")
             th
@@ -242,5 +244,7 @@ block content
               span {{node.stats.block.propagation | blockPropagationFilter}}
             td.peerPropagationChart(class="{{node.id}}")
               nodepropagchart(data="{{node.history.join(',')}}")
+            td
+              span {{node.stats.casper.last_finalized_epoch}}
             td(class="{{ node.stats | propagationNodeAvgTimeClass : bestBlock }}") {{ node.stats | blockPropagationAvgFilter : bestBlock }}
             td(class="{{ node.stats.uptime | upTimeClass : node.stats.active }}") {{ node.stats.uptime | upTimeFilter }}

@@ -209,6 +209,38 @@ api.on('connection', function (spark)
 		}
 	});
 
+	spark.on('casper', function (data)
+	{
+		if( !_.isUndefined(data.id) && !_.isUndefined(data.casper) )
+		{
+			Nodes.updateCasper(data.id, data.casper, function (err, stats)
+			{
+				if(err !== null)
+				{
+					console.error('API', 'CPR', 'Casper collection update error:', err);
+				}
+				else
+				{
+					if(stats !== null)
+					{
+						client.write({
+							action: 'casper',
+							data: stats
+						});
+
+						console.success('API', 'CPR', 'Casper:', 'from:', data.id);
+
+						Nodes.getCharts();
+					}
+				}
+			});
+		}
+		else
+		{
+			console.error('API', 'CPR', 'Casper websocket error:', data);
+		}
+	});
+
 
 	spark.on('pending', function (data)
 	{
