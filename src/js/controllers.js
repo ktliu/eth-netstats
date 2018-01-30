@@ -252,6 +252,16 @@ netStatsApp.controller('StatsCtrl', function($scope, $filter, $localStorage, soc
 
 				break;
 
+			case "casper":
+				var index = findIndex({id: data.id});
+
+				if( index >= 0 && !_.isUndefined($scope.nodes[index]) && !_.isUndefined($scope.nodes[index].stats.casper) )
+				{
+					$scope.nodes[index].stats.casper = data.casper;
+				}
+
+				break;
+
 			case "pending":
 				var index = findIndex({id: data.id});
 
