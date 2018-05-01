@@ -215,6 +215,14 @@ block content
             th
               span(data-toggle="tooltip", data-placement="top", title="Last Finalized Epoch") lfe
             th.th-blockhash
+            th
+              span(data-toggle="tooltip", data-placement="top", title="Current Vote") cv
+            th
+              span(data-toggle="tooltip", data-placement="top", title="Current Vote Percentage") %
+            th
+              span(data-toggle="tooltip", data-placement="top", title="Previous Vote") pv
+            th
+              span(data-toggle="tooltip", data-placement="top", title="Previous Vote Percentage") %  
             th.th-peerPropagationAvg
               i.icon-gas(data-toggle="tooltip", data-placement="top", title="Average propagation time", ng-click="orderTable(['stats.propagationAvg'], false)")
             th
@@ -263,5 +271,13 @@ block content
               span {{node.stats.casper.last_finalized_epoch}} /{{node.stats.casper.last_finalized_epoch*50}}
             td
               span.small {{node.stats.casper.last_finalized_epoch_hash | hashFilter}}
+            td
+              span {{node.stats.casper.cur_dyn_votes * node.stats.casper.deposit_scaled}}
+            td
+              span {{node.stats.casper.cur_deposits ? node.stats.casper.cur_dyn_votes * node.stats.casper.deposit_scaled * 100 / node.stats.casper.cur_deposits : 0}}
+            td
+              span {{node.stats.casper.prev_dyn_votes * node.stats.casper.deposit_scaled}}
+            td
+              span {{node.stats.casper.prev_deposits ? node.stats.casper.prev_dyn_votes * node.stats.casper.deposit_scaled * 100 / node.stats.casper.prev_deposits : 0}}
             td(class="{{ node.stats | propagationNodeAvgTimeClass : bestBlock }}") {{ node.stats | blockPropagationAvgFilter : bestBlock }}
             td(class="{{ node.stats.uptime | upTimeClass : node.stats.active }}") {{ node.stats.uptime | upTimeFilter }}
